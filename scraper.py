@@ -68,8 +68,8 @@ def login_and_get_schedule(playwright):
     """Se connecte et récupère l'emploi du temps"""
 
     browser = playwright.chromium.launch(
-        headless=False,  # Voir le navigateur
-        slow_mo=1000     # Ralentir les actions
+        headless=True,  # ✅ Correct pour GitHub Actions
+        slow_mo=0       # Pas besoin de ralentir sur le serveur
     )
     context = browser.new_context()
     page = context.new_page()
