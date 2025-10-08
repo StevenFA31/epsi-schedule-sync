@@ -1,0 +1,6 @@
+.env
+emploi_du_temps.ics
+*.png
+*.html
+__pycache__/
+venv/
