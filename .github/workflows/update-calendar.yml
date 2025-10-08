@@ -11,6 +11,9 @@ on:
 jobs:
   update-calendar:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
     
     steps:
       - name: Checkout
@@ -40,3 +43,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./
           publish_branch: gh-pages
+          force_orphan: true
