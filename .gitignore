@@ -1,5 +1,5 @@
 .env
-emploi_du_temps.ics
+# emploi_du_temps.ics
 *.png
 *.html
 __pycache__/
