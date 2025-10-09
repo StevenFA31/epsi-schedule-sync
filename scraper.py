@@ -31,19 +31,24 @@ if not all([USERNAME, PASSWORD, HASH_URL, USER_ID]):
     exit(1)
 
 SERVER_ID = "C"
-WEEKS_TO_FETCH = 8  # Nombre de semaines à récupérer
+WEEKS_TO_FETCH = 52  # Récupère 52 semaines (1 année)
 
 # ============================================
 # FONCTIONS UTILITAIRES
 # ============================================
 
 
-def get_wednesdays(num_weeks=8):
+def get_wednesdays(num_weeks=52):
     """Génère la liste des mercredis pour les N prochaines semaines"""
-    today = datetime.now()
-    # Trouve le prochain mercredi (ou aujourd'hui si c'est mercredi)
-    days_until_wednesday = (2 - today.weekday()) % 7
-    next_wednesday = today + timedelta(days=days_until_wednesday)
+    # Commencer du 1er septembre 2025
+    start_date = datetime(2025, 9, 1)
+
+    # Trouver le premier mercredi à partir de cette date
+    days_until_wednesday = (2 - start_date.weekday()) % 7
+    if days_until_wednesday == 0 and start_date.weekday() != 2:
+        days_until_wednesday = 7
+
+    next_wednesday = start_date + timedelta(days=days_until_wednesday)
 
     wednesdays = []
     for i in range(num_weeks):
@@ -447,10 +452,9 @@ def extract_event_info(case_div, jour_mapping, paris_tz):
     if len(lines) == 1:
         # Une seule ligne = probablement la classe, pas de formateur
         if any(keyword in lines[0].lower() for keyword in ['tronc', 'b3', 'classe', 'groupe', '25/26', '26/27']):
-            formateur = None  # Pas de formateur
+            formateur = None
             classe = lines[0]
         else:
-            # C'est probablement le formateur seul
             formateur = lines[0]
             classe = ""
     elif len(lines) >= 2:
@@ -460,10 +464,9 @@ def extract_event_info(case_div, jour_mapping, paris_tz):
         formateur = None
         classe = ""
 
-    # Construire la description
+    # Construire la description avec retours à la ligne
     description_parts = []
 
-    # N'ajouter le formateur que s'il existe
     if formateur:
         description_parts.append(f"Formateur: {formateur}")
 
@@ -471,9 +474,9 @@ def extract_event_info(case_div, jour_mapping, paris_tz):
         description_parts.append(f"Classe: {classe}")
 
     if teams_links:
-        description_parts.append(f"\nLiens Teams:")
+        description_parts.append(f"Liens Teams:")
         for i, link in enumerate(teams_links, 1):
-            description_parts.append(f"  • Lien {i}: {link}")
+            description_parts.append(f"  Lien {i}: {link}")
 
     description = '\n'.join(description_parts)
 
