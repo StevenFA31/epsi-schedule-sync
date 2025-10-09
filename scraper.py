@@ -439,30 +439,28 @@ def extract_event_info(case_div, jour_mapping, paris_tz):
 
     prof_text = prof_td.get_text(strip=True)
 
-    # DEBUG - À ajouter temporairement
-    if "Election" in titre or "Info" in titre:
-        print(f"\n      🔍 DEBUG - Titre: {titre}")
-        print(f"      📝 prof_text brut: '{prof_text}'")
-        print(f"      📝 prof_text.split('\\n'): {prof_text.split(chr(10))}")
-
     # Séparer formateur et classe
     lines = [line.strip() for line in prof_text.split('\n') if line.strip()]
 
-    # Détecter si c'est un cours sans formateur
-    if len(lines) == 1:
-        # Une seule ligne = probablement la classe, pas de formateur
-        if any(keyword in lines[0].lower() for keyword in ['tronc', 'b3', 'classe', 'groupe', '25/26', '26/27']):
-            formateur = None
-            classe = lines[0]
+    formateur = None
+    classe = ""
+
+    if len(lines) == 0:
+        # Aucune info
+        pass
+    elif len(lines) == 1:
+        # Une seule ligne
+        line = lines[0]
+        # Si c'est une classe
+        if any(kw in line.lower() for kw in ['tronc', 'b3', 'asrbd', 'classe', 'groupe', '25/26', '26/27', 'epsi', 'ds']):
+            classe = line
         else:
-            formateur = lines[0]
-            classe = ""
+            # C'est un formateur
+            formateur = line
     elif len(lines) >= 2:
+        # Au moins deux lignes
         formateur = lines[0]
         classe = lines[1]
-    else:
-        formateur = None
-        classe = ""
 
     # Construire la description avec retours à la ligne
     description_parts = []
