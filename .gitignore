@@ -1,4 +1,9 @@
 .env
+.env.exampl
+requirements.txt
+requirements.txt.backup
+scraper.py.backup
+test_connection.py
 # emploi_du_temps.ics
 *.png
 *.html
