@@ -16,6 +16,8 @@
 - [Dépendances](#-dépendances)
 - [Exécution manuelle](#-exécution-manuelle)
 - [Dépannage](#-dépannage)
+- [Auteurs](#-auteurs)
+- [Remarques](#-remarques)
 
 ---
 
