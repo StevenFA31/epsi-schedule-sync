@@ -8,15 +8,15 @@
 
 ## 📋 Table des matières
 - [Aperçu](#-aperçu)
-- [Fonctionnement](#-fonctionnement)
+- [Fonctionnement](#fonctionnement)
 - [Installation locale](#-installation-locale)
 - [Configuration](#-configuration)
 - [Automatisation GitHub Actions](#-automatisation-github-actions)
 - [Fichier généré](#-fichier-généré)
 - [Dépendances](#-dépendances)
-- [Exécution manuelle](#-exécution-manuelle)
+- [Exécution manuelle](#exécution-manuelle)
 - [Dépannage](#-dépannage)
-- [Auteurs](#-auteurs)
+- [Auteurs](#auteurs)
 - [Remarques](#-remarques)
 
 ---
